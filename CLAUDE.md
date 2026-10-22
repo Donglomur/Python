@@ -19,8 +19,10 @@ performance. There is no application to run; the unit of work is a single file.
 This repo uses `uv` and Python >= 3.15, not pip or poetry.
 
 - Install deps: `uv sync --group=test`
-- Run tests: `uv run pytest` (pytest is configured with `--doctest-modules`, so this
-  runs every file's doctests). One file: `uv run pytest maths/fibonacci.py`
+- Run tests: `uv sync --group=test` first, then `uv run pytest`. pytest lives in the
+  test group, so without the sync `uv run pytest` can fall back to a system pytest on
+  the wrong Python. pytest is configured with `--doctest-modules`, so this runs every
+  file's doctests. One file: `uv run pytest maths/fibonacci.py`
 - Lint (must pass): `uvx ruff check .` or `uvx ruff check <file>`
 - Format: `uvx ruff format <file>`
 - Type check (advisory only): `uv run --with ty ty check <file>`
